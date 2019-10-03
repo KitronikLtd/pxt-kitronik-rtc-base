@@ -1,0 +1,17 @@
+{
+    "name": "pxt-kitronik-rtc-base",
+    "version": "0.0.1",
+    "description": "Base code for RTC Chip used on Kitronik Products",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md",
+        "rtc_base.ts"
+    ],
+    "testFiles": [
+        "tests.ts"
+    ],
+    "public": true
+}
