@@ -1,0 +1,18 @@
+{
+    "target": "microbit",
+    "targetVersion": "2.1.13",
+    "name": "pxt-kitronik-rtc-base",
+    "meta": {},
+    "editor": "tsprj",
+    "pubId": "",
+    "pubCurrent": false,
+    "_rev": null,
+    "id": "03c9cd6e-9cb2-491c-d5fa-681828d3241f",
+    "recentUse": 1570116071,
+    "modificationTime": 1570116071,
+    "blobId": null,
+    "blobVersion": null,
+    "blobCurrent": false,
+    "isDeleted": false,
+    "path": "pxt-kitronik-rtc-base"
+}
