@@ -121,7 +121,7 @@ namespace kitronik_RTC {
 
         // First set the external oscillator
         writeBuf[0] = RTC_CONTROL_REG
-        writeBuf[1] = 0x43										//only enable EXTOSC bit, external oscillator
+        writeBuf[1] = 0x13										//only enable EXTOSC bit, external oscillator
         pins.i2cWriteBuffer(CHIP_ADDRESS, writeBuf, false)
 
         //Reading weekday register so can mask the Battery backup supply
