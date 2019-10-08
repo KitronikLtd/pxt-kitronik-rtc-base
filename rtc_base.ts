@@ -50,56 +50,6 @@ namespace kitronik_RTC {
     export let currentYear = 0
     export let initalised = false    		//a flag to allow us to initialise without explicitly calling the secret incantation
 
-    /**
-     * Days of the week
-     */
-    export enum Weekdays {
-        //% block=Sunday
-        Sunday = 1,
-        //% block=Monday
-        Monday = 2,
-        //% block=Tuesday
-        Tuesday = 3,
-        //% block=Wednesday
-        Wednesday = 4,
-        //% block=Thursday
-        Thursday = 5,
-        //% block=Friday
-        Friday = 6,
-        //% block=Saturday
-        Saturday = 7
-    }
-
-    /**
-     * Months of the year
-     */
-    export enum Months {
-        //% block=January
-        January = 1,
-        //% block=February
-        February = 2,
-        //% block=March
-        March = 3,
-        //% block=April
-        April = 4,
-        //% block=May
-        May = 5,
-        //% block=June
-        June = 6,
-        //% block=July
-        July = 7,
-        //% block=August
-        August = 8,
-        //% block=September
-        September = 9,
-        //% block=October
-        October = 10,
-        //% block=November
-        November = 11,
-        //% block=December
-        December = 12
-    }
-
     //decToBcd function to convert a decimal number to required Binary-Coded-Deceminal (bcd) for the RTC
     export function decToBcd(Value: number) {
 
