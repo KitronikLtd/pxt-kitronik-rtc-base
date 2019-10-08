@@ -218,7 +218,7 @@ namespace kitronik_RTC {
     }
 
     //Function to calculate which day of the week a particular date is
-    export function calcWeekday(date: number, month: number, year: number) number {
+    export function calcWeekday(date: number, month: number, year: number): number {
 
         let dayOffset = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4]
         if (month < 3) {
