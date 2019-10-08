@@ -21,6 +21,20 @@ namespace kitronik_RTC {
     export const RTC_OSCILLATOR_REG = 0x08 	//the oscillator digital trim register
     export const RTC_PWR_UP_MINUTE_REG = 0x1C  //the RTC power up minute register
 
+    export const RTC_ALM0_SEC_REG = 0x0A        //the RTC Alarm 0 seconds register
+    export const RTC_ALM0_MIN_REG = 0x0B        //the RTC Alarm 0 minutes register
+    export const RTC_ALM0_HOUR_REG = 0x0C       //the RTC Alarm 0 hours register
+    export const RTC_ALM0_WEEKDAY_REG = 0x0D    //the RTC Alarm 0 weekday register
+    export const RTC_ALM0_DATE_REG = 0x0E       //the RTC Alarm 0 date register
+    export const RTC_ALM0_MONTH_REG = 0x0F      //the RTC Alarm 0 month register
+
+    export const RTC_ALM1_SEC_REG = 0x11        //the RTC Alarm 1 seconds register
+    export const RTC_ALM1_MIN_REG = 0x12        //the RTC Alarm 1 minutes register
+    export const RTC_ALM1_HOUR_REG = 0x13       //the RTC Alarm 1 hours register
+    export const RTC_ALM1_WEEKDAY_REG = 0x14    //the RTC Alarm 1 weekday register
+    export const RTC_ALM1_DATE_REG = 0x15       //the RTC Alarm 1 date register
+    export const RTC_ALM1_MONTH_REG = 0x16      //the RTC Alarm 1 month register
+
     export const START_RTC = 0x80				//enable bit of seconds register
     export const STOP_RTC = 0x00				//disable bit of seconds register
 
@@ -201,5 +215,20 @@ namespace kitronik_RTC {
         currentDay = readBuf[4]
         currentMonth = readBuf[5]
         currentYear = readBuf[6]
+    }
+
+    //Function to calculate which day of the week a particular date is
+    export function calcWeekday(date: number, month: number, year: number) number {
+
+        let dayOffset = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4]
+        if (month < 3) {
+            month = month - 1
+        }
+        //Function returns number in range 0 - 6 (where 0 = Sunday, 1 = Monday...6 = Saturday)
+        let weekday = (year + Math.idiv(year, 4) - Math.idiv(year, 100) + Math.idiv(year, 400) + dayOffset[month - 1] + date) % 7
+
+        weekday = weekday + 1 //Add 1 so range is 1 - 7 which matches the RTC chip setup
+
+        return weekday
     }
 }
