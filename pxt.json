@@ -10,8 +10,6 @@
         "README.md",
         "rtc_base.ts"
     ],
-    "testFiles": [
-        "tests.ts"
-    ],
+    "testFiles": [],
     "public": true
 }
