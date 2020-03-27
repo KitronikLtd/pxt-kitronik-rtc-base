@@ -112,27 +112,27 @@ namespace kitronik_RTC {
         let readCurrentSeconds = 0
         let readWeekDayReg = 0
 
-        //Seconds register read for current seconds for when masking start RTC bit
-        writeBuf[0] = RTC_SECONDS_REG
-        pins.i2cWriteBuffer(CHIP_ADDRESS, writeBuf, false)
-
-        readBuf = pins.i2cReadBuffer(CHIP_ADDRESS, 1, false)
-        readCurrentSeconds = readBuf[0]
 
         // First set the external oscillator
         writeBuf[0] = RTC_CONTROL_REG
-        writeBuf[1] = 0x00										//only enable EXTOSC bit, external oscillator
+        writeBuf[1] = 0x00          //only enable EXTOSC bit, external oscillator
         pins.i2cWriteBuffer(CHIP_ADDRESS, writeBuf, false)
 
         //Reading weekday register so can mask the Battery backup supply
-        writeBuf[0] = RTC_WEEKDAY_REG
-        pins.i2cWriteBuffer(CHIP_ADDRESS, writeBuf, false)
+        pins.i2cWriteNumber(CHIP_ADDRESS, RTC_WEEKDAY_REG,NumberFormat.UInt8LE, false)
         readBuf = pins.i2cReadBuffer(CHIP_ADDRESS, 1, false)
         readWeekDayReg = readBuf[0]
+        if((readWeekDayReg & ENABLE_BATTERY_BACKUP)==0) //we need to set the battery backup bit
+        {
+          writeBuf[0] = RTC_WEEKDAY_REG
+          writeBuf[1] = ENABLE_BATTERY_BACKUP | readWeekDayReg             //logic OR the two bytes together for new value
+          pins.i2cWriteBuffer(CHIP_ADDRESS, writeBuf, false)       //write to enable battery backup and mask with current reading of register
+        }
+        //Seconds register read for current seconds for when masking start RTC bit
+        pins.i2cWriteNumber(CHIP_ADDRESS,RTC_SECONDS_REG, NumberFormat.UInt8LE, false)
 
-        writeBuf[0] = RTC_WEEKDAY_REG
-        writeBuf[1] = ENABLE_BATTERY_BACKUP | readWeekDayReg             //logic OR the two bytes together for new value
-        pins.i2cWriteBuffer(CHIP_ADDRESS, writeBuf, false)       //write to enable battery backup and mask with current reading of register
+        readBuf = pins.i2cReadBuffer(CHIP_ADDRESS, 1, false)
+        readCurrentSeconds = readBuf[0]
 
         //Block write to start oscillator
         writeBuf[0] = RTC_SECONDS_REG
